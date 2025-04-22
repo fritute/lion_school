@@ -5,5 +5,23 @@
     <string name="title">LION SCHOOL</string>
     <string name="explication">Get to your destination faster, study at the best vocational school in Brazil. Be the best version of yourself.</string>
     <string name="name_button">Get Started</string>
+    <!-- Cursos -->
+    <string name="course_ds_name">Desenvolvimento de Sistemas</string>
+    <string name="course_ds_description">Aprenda a desenvolver aplicações web e mobile.</string>
+    <string name="course_ds_duration">3 semestres</string>
+
+    <string name="course_rds_name">Redes de Computadores</string>
+    <string name="course_rds_description">Aprenda a projetar redes de comunicação.</string>
+    <string name="course_rds_duration">3 semestres</string>
+
+    <string name="course_ele_name">Eletroeletrônica</string>
+    <string name="course_ele_description">Aprenda a projetar circuitos eletrônicos.</string>
+    <string name="course_ele_duration">3 semestres</string>
+
+    <!-- Placeholder busca -->
+    <string name="search_placeholder">Encontre seu curso</string>
+
+    <!-- Título de seção -->
+    <string name="courses_section_title">Courses</string>
 
 </resources>
