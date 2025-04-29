@@ -198,7 +198,7 @@ fun SubjectPerformanceItem(disciplina: Disciplina) {
     }
 }
 
-// Função mock para preview
+
 private fun mockStudentData(): Aluno {
     return Aluno(
         id = 1,
@@ -212,7 +212,7 @@ private fun mockStudentData(): Aluno {
             Disciplina(1, "SIOP", 70.0, "Aprovado"),
             Disciplina(2, "INRI", 86.0, "Aprovado"),
             Disciplina(3, "INNU", 59.0, "Aprovado"),
-            Disciplina(4, "HA", 100.0, "Aprovado"),
+            Disciplina(4, "HA", 90.0, "Aprovado"),
             Disciplina(5, "SERE", 44.0, "Reprovado"),
             Disciplina(6, "CAES", 52.0, "Reprovado")
         )

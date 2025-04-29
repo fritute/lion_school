@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -24,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import br.senai.sp.jandira.lionschool.R
 import br.senai.sp.jandira.lionschool.ui.theme.LionSchoolTheme
 
@@ -53,16 +55,22 @@ fun StudentsScreen(navController: NavHostController) {
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = stringResource(R.string.title),
-                            fontSize = 18.sp,
-                            color = Color.Blue,
+                            fontSize = 24.sp,
+                            color = Color(0xFF3347B0),
                             fontWeight = FontWeight.Bold
                         )
                     }
                     Card(
-                        modifier = Modifier.size(40.dp).clip(CircleShape),
+                        modifier = Modifier
+                            .size(40.dp)
+                            .clip(CircleShape)
+                            .clickable {},
                         colors = CardDefaults.cardColors(Color(0xFFFFC23D))
                     ) {
-                        Box(contentAlignment = Alignment.Center) {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
                             Text(
                                 text = "DS",
                                 fontWeight = FontWeight.Bold,
@@ -72,14 +80,19 @@ fun StudentsScreen(navController: NavHostController) {
                     }
                 }
 
-                // Divider
-                Divider(
-                    color = Color(0xFFFFC23D),
-                    thickness = 2.dp,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                )
 
-                // Search bar zxdc-
+
+                // Search bar
+                OutlinedTextField(
+                    value = search,
+                    onValueChange = { search = it },
+                    leadingIcon = {
+                        Icon(Icons.Filled.Search, contentDescription = "Search")
+                    },
+                    label = { Text("Buscar aluno") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp)
+                )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -98,14 +111,14 @@ fun StudentsScreen(navController: NavHostController) {
                 // Título com ícone
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        painter = painterResource(id = R.drawable.twitter),
+                        painter = painterResource(id = R.drawable.hat),
                         contentDescription = "Students",
                         tint = Color(0xFFFFC23D),
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "Students List",
+                        text = "Lista de Alunos",
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF3347B0)
@@ -117,7 +130,7 @@ fun StudentsScreen(navController: NavHostController) {
                 // Cards de estudantes (mock layout)
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     items(5) { // mock de 5 cards
-                        StudentCard()
+                        StudentCard(anoConclusao = "2023")
                     }
                 }
             }
@@ -143,46 +156,67 @@ fun FilterButton(text: String) {
 }
 
 @Composable
-fun StudentCard() {
+fun StudentCard(anoConclusao: String) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp),
+            .height(80.dp)
+            .clickable {},
         colors = CardDefaults.cardColors(containerColor = Color(0xFF7D87E4)),
         shape = RoundedCornerShape(12.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier.padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                contentDescription = "Student photo",
-                modifier = Modifier
-                    .size(48.dp)
-                    .clip(CircleShape)
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Column {
-                Text(
-                    text = "Nome do Aluno",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                    contentDescription = "Foto do aluno",
+                    modifier = Modifier
+                        .size(110.dp)
+                        .clip(CircleShape)
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                Column(verticalArrangement = Arrangement.Center) {
+                    Text(
+                        text = "Nome do Aluno",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                    Text(
+                        text = "RA 0000000",
+                        fontSize = 12.sp,
+                        color = Color.White.copy(alpha = 0.8f)
+                    )
+                }
+                Icon(
+                    imageVector = Icons.Filled.DateRange,
+                    contentDescription = "Ano de Conclusão",
+                    tint = Color.White,
+                    modifier = Modifier.size(20.dp)
+                        .width(100.dp)
                 )
                 Text(
-                    text = "RA 0000000",
+                    text = anoConclusao,
                     fontSize = 14.sp,
-                    color = Color.White
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Yellow,
+
                 )
             }
+
         }
     }
 }
+
 @Preview(showSystemUi = true)
 @Composable
 fun StudentsScreenPreview() {
     LionSchoolTheme {
-        StudentsScreen(navController = androidx.navigation.compose.rememberNavController())
+        StudentsScreen(navController = rememberNavController())
     }
 }
